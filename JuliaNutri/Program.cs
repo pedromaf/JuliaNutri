@@ -1,5 +1,8 @@
+using JuliaNutri.Data;
 using JuliaNutri.Services;
 using JuliaNutri.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +11,14 @@ builder.Services.AddControllers();
 
 #region Service layer
 builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();
+#endregion
+
+#region DB Settings
+string mySQLConnectionString = builder.Configuration.GetConnectionString("JuliaNutriConnection");
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 30));
+
+// Connecting with MySQL database.
+builder.Services.AddDbContext<JuliaNutriDbContext>(opts => opts.UseLazyLoadingProxies().UseMySql(mySQLConnectionString, serverVersion));
 #endregion
 
 builder.Services.AddCors();
