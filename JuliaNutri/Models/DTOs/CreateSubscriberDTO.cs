@@ -1,5 +1,6 @@
 ﻿using JuliaNutri.Resources;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace JuliaNutri.Models.DTOs
 {
@@ -11,5 +12,7 @@ namespace JuliaNutri.Models.DTOs
 
         [Required(ErrorMessage = Messages.SUBSCRIBER_EMAIL_REQUIRED)]
         public string Email { get; set; }
+
+        public string PhoneNumber  { get; set; }
     }
 }

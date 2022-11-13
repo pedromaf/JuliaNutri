@@ -11,6 +11,7 @@ builder.Services.AddControllers();
 
 #region Service layer
 builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 #endregion
 
 #region DB Settings

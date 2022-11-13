@@ -3,6 +3,7 @@ using JuliaNutri.Services;
 using JuliaNutri.Services.Interfaces;
 using JuliaNutri.Util;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace JuliaNutri.Controllers
 {
@@ -25,7 +26,10 @@ namespace JuliaNutri.Controllers
                 
                 return Ok();
             }
-            catch(ArgumentException exc) { return this.HandleException(exc); }
+            catch (ArgumentException exc) { return this.HandleException(exc); }
+            catch (DbUpdateConcurrencyException exc) { return this.HandleException(exc); }
+            catch (DbUpdateException exc) { return this.HandleException(exc); }
+            catch (NotImplementedException exc) { return this.HandleException(exc); } // TODO: Remove after function implementation.
         }
     }
 }
